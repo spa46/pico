@@ -1,13 +1,14 @@
-from ssd1306 import SSD1306_I2C
-from config import i2c
+from machine import I2C
+from lcd_api import LcdApi
+from i2c_lcd import I2cLcd
+from config import *
 
-oled = SSD1306_I2C(128, 64, i2c)
+i2c = I2C(0, scl=Pin(I2C_SCL), sda=Pin(I2C_SDA), freq=400000)
+lcd = I2cLcd(i2c, 0x27, 2, 16)  # 16x2 LCD
 
-def update_oled(ph, ec, temp, humidity, water_status, co2):
-    oled.fill(0)
-    oled.text(f"pH: {ph}", 0, 0)
-    oled.text(f"EC: {ec}", 0, 10)
-    oled.text(f"T: {temp}C H: {humidity}%", 0, 20)
-    oled.text(f"Water: {water_status}", 0, 30)
-    oled.text(f"CO2: {co2} ppm", 0, 40)
-    oled.show()
+def update_lcd(ph, ec, temp, humidity, co2, water_status):
+    lcd.clear()
+    lcd.move_to(0, 0)
+    lcd.putstr(f"pH:{ph} EC:{ec}")
+    lcd.move_to(0, 1)
+    lcd.putstr(f"T:{temp}C H:{humidity}%")

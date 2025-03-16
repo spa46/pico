@@ -1,25 +1,24 @@
-from machine import Pin, ADC, I2C, UART, PWM
+from machine import Pin, ADC, I2C, UART
 
 # Analog Sensors
-PH_SENSOR_PIN = 26
-EC_SENSOR_PIN = 27
+PH_SENSOR_PIN = 26  # Industrial pH Sensor
+EC_SENSOR_PIN = 27  # EC Sensor
 
 # Digital Sensors
-DHT_PIN = 3
-WATER_LEVEL_PIN = 4
+DHT_PIN = 3  # DHT22 (Temp & Humidity)
+WATER_LEVEL_PIN = 4  # Water Level Sensor
 
-# I2C Devices
+# CO2 Sensor (MH-Z19B via UART)
+CO2_UART_TX = 16
+CO2_UART_RX = 17
+CO2_BAUDRATE = 9600
+
+# I2C for LCD Display
 I2C_SDA = 20
 I2C_SCL = 21
 
-# UART (CO2 Sensor)
-CO2_TX = 8
-CO2_RX = 9
-
 # Actuators (Relays & MOSFET)
 WATER_PUMP_PIN = 10
-AIR_PUMP_PIN = 11
 SOLENOID_VALVE_PIN = 12
 LED_GROW_LIGHTS_PIN = 13
 COOLING_FAN_PIN = 14
-BUZZER_PIN = 15

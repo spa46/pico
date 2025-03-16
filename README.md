@@ -1,39 +1,68 @@
-# pico
+# 🌱 Raspberry Pi Pico Hydroponics System
 
-## 1. Required Components
+## 1️⃣ Required Components
 
-(A) Sensors
-pH Sensor – Monitors the acidity/alkalinity of the nutrient solution.
-EC (Electrical Conductivity) Sensor – Measures the concentration of dissolved salts.
-Temperature Sensor (DS18B20) – Monitors water temperature.
-Humidity & Air Temperature Sensor (DHT22) – Monitors ambient conditions.
-Water Level Sensor – Ensures adequate water levels.
-Light Sensor (BH1750 or LDR) – Measures light intensity.
-CO2 Sensor (MH-Z19B) – Measures carbon dioxide levels.
+### 🖥️ Microcontroller
 
-B) Peripherals
-Water Pump (Relay Module) – Circulates nutrient solution.
-Air Pump (Relay Module) – Provides oxygenation.
-Solenoid Valve (Relay Module) – Controls nutrient flow.
-LED Grow Lights (MOSFET) – Provides artificial lighting.
-Cooling Fan (MOSFET/Relay) – Controls temperature.
-LCD/OLED Display (I2C SSD1306) – Displays system status.
-Buzzer – Alerts on critical conditions.
+- **Raspberry Pi Pico** (MicroPython Compatible)
 
-## 2. Interfaces & Connections
-| Sensor/Peripheral       | Interface | Pins Used (Example)     |
-|-------------------------|-----------|-------------------------|
-| pH Sensor              | Analog    | ADC0 (GP26)             |
-| EC Sensor              | Analog    | ADC1 (GP27)             |
-| DS18B20 (Water Temp)   | 1-Wire    | GP2                     |
-| DHT22 (Air Temp & Humidity) | Digital  | GP3                     |
-| Water Level Sensor     | Digital   | GP4                     |
-| BH1750 (Light Sensor)  | I2C       | SDA (GP20), SCL (GP21)  |
-| MH-Z19B (CO2 Sensor)   | UART      | TX(GP8), RX(GP9)        |
-| Water Pump (Relay)     | Digital   | GP10                    |
-| Air Pump (Relay)       | Digital   | GP11                    |
-| Solenoid Valve (Relay) | Digital   | GP12                    |
-| LED Grow Lights (MOSFET) | Digital | GP13                    |
-| Cooling Fan (Relay)    | Digital   | GP14                    |
-| OLED Display (SSD1306) | I2C       | SDA (GP20), SCL (GP21)  |
-| Buzzer                | PWM       | GP15                    |
+### 🌡️ Sensors
+
+- **DHT22** – Temperature & Humidity Sensor
+- **MH-Z19B** – CO2 Sensor (UART Communication)
+- **Industrial pH Sensor** – Measures pH level of the nutrient solution
+- **EC Sensor** – Measures electrical conductivity (nutrient concentration)
+- **Water Level Sensor** – Detects if water level is low
+
+### ⚙️ Actuators
+
+- **Water Pump** – Circulates water in the hydroponics system
+- **Solenoid Valve** – Adjusts pH by adding alkaline or acidic solutions
+- **LED Grow Lights** – Provides artificial lighting for plant growth
+- **Cooling Fan** – Helps regulate temperature in the system
+
+### 📟 Display
+
+- **16x2 I2C LCD Display** – Shows sensor readings & system status
+
+---
+
+## 2️⃣ Interfaces & Connections
+
+### 🎛️ **Analog Inputs (ADC)**
+
+| Component            | Pico Pin    |
+| -------------------- | ----------- |
+| Industrial pH Sensor | GP26 (ADC0) |
+| EC Sensor            | GP27 (ADC1) |
+
+### 📡 **Digital Inputs**
+
+| Component               | Pico Pin |
+| ----------------------- | -------- |
+| DHT22 (Temp & Humidity) | GP3      |
+| Water Level Sensor      | GP4      |
+
+### 🔗 **UART Communication**
+
+| Component            | TX Pin | RX Pin | Baud Rate |
+| -------------------- | ------ | ------ | --------- |
+| MH-Z19B (CO2 Sensor) | GP16   | GP17   | 9600      |
+
+### 🔌 **Actuator Outputs**
+
+| Component       | Pico Pin |
+| --------------- | -------- |
+| Water Pump      | GP10     |
+| Solenoid Valve  | GP12     |
+| LED Grow Lights | GP13     |
+| Cooling Fan     | GP14     |
+
+### 📟 **I2C Communication (for LCD Display)**
+
+| Signal | Pico Pin |
+| ------ | -------- |
+| SDA    | GP20     |
+| SCL    | GP21     |
+
+---
