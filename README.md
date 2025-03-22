@@ -66,3 +66,22 @@
 | SCL    | GP21     |
 
 ---
+
+## 2 Run
+There are two ways to run the project.
+1. Emulator
+2. Target Board
+
+
+### 2.1 Run on Emulator
+
+
+To run the project with Emulator, follow the steps below.
+_**Renode**_ is used for the emulation.
+
+git submodule update --init --recursive
+
+```
+docker run -ti -e DISPLAY -v $XAUTHORITY:/home/developer/.Xauthority --net=host antmicro/renode:1.15.2
+docker run -ti -e DISPLAY -v $XAUTHORITY:/home/developer/.Xauthority -v renode_rp2040:/opt/renode/rp2040 --net=host antmicro/renode:1.15.2
+```

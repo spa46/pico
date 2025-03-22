@@ -1,0 +1,2 @@
+export USE_EMULATOR=1 
+micropython main.py
