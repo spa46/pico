@@ -85,3 +85,7 @@ git submodule update --init --recursive
 docker run -ti -e DISPLAY -v $XAUTHORITY:/home/developer/.Xauthority --net=host antmicro/renode:1.15.2
 docker run -ti -e DISPLAY -v $XAUTHORITY:/home/developer/.Xauthority -v renode_rp2040:/opt/renode/rp2040 --net=host antmicro/renode:1.15.2
 ```
+
+
+# Reference
+- https://wiki.seeedstudio.com/Grove-EC-Sensor-kit/
