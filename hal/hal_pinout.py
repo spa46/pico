@@ -1,4 +1,5 @@
 from machine import Pin
+from machine import SoftI2C
 
 # Button definitions
 # BUTTON_UP = Pin(2, Pin.IN, Pin.PULL_UP)
@@ -15,10 +16,21 @@ from machine import Pin
 # LCD_D7 = Pin(11, Pin.OUT)
 
 # GPIO
-dht22 = Pin(3, Pin.IN)
-water_level = Pin(4, Pin.IN)
-sys_led = Pin('LED', Pin.OUT) # Pin 25: System LED
+dht22 = Pin(3)
+# water_level = Pin(4, Pin.IN)
+# sys_led = Pin('LED', Pin.OUT) # Pin 25: System LED
+
+# water_pump = Pin(10, Pin.OUT)
+# solenoid_valve = Pin(12, Pin.OUT)
+
+
+#UART
+# co2 = 
+# TX:gp16, RX: gp17
 
 # I2C LCD (optional, if using I2C)
-from machine import I2C
-i2c = I2C(0, scl=Pin(27), sda=Pin(26), freq=400_000)
+i2c = SoftI2C(sda=Pin(21), scl=Pin(20), freq=400000)
+
+
+# temp
+mq135 = Pin(28)
