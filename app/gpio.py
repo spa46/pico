@@ -2,24 +2,25 @@
 
 # from hal.hal_pinout import sys_led
 from time import sleep
-from hal.hal_pinout import dht22
+from hal.hal_pinout import gpio2, gpio3
 import dht
+import onewire, ds18x20
 
 class Led:
-  def __init__(self) -> None:
-    pass
-    # sys = sys_led
-
-  def system_led_on(self) -> None:
-    pass
-
-  def system_led_off(self) -> None:
-    pass
-
+    def __init__(self) -> None:
+        pass
+    
+    def system_led_on(self) -> None:
+        pass
+    
+    def system_led_off(self) -> None:
+        pass
+    
+    
 class Dht:
     def __init__(self) -> None:
-        self.sensor = dht.DHT22(dht22)
-    
+        self.sensor = dht.DHT22(gpio3)
+
     def measure(self) -> None:
         try:
             self.sensor.measure()
@@ -35,3 +36,24 @@ class Dht:
     def humidity(self) -> None:
         h = self.sensor.humidity()
         print(h)
+
+
+class WaterTemperature:
+    '''
+    DS18B20 Sensor
+    '''
+    def __init__(self) -> None:
+        self.sensor = ds18x20.DS18X20(onewire.OneWire(gpio2))
+        self.roms = self.sensor.scan()
+
+        print('Found DS devices: ', self.roms)
+
+    def measure(self) -> None:
+        self.sensor.convert_temp()
+
+        sleep(0.75)
+
+        for rom in self.roms:
+            print(rom)
+            
+            print(self.sensor.read_temp(rom))    

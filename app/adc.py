@@ -1,13 +1,13 @@
 # Author: seansc.park
 
 from hal.hal_mq135 import MQ135
-from hal.hal_pinout import mq135
+from hal.hal_pinout import adc2
 import time
 
 
 class Mq135:
     def __init__(self) -> None:
-        self.mq135 = MQ135(mq135)
+        self.mq135 = MQ135(adc2)
 
     def measure(self, temperature, humidity):
         rzero = self.mq135.get_rzero()

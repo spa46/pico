@@ -4,24 +4,36 @@ from machine import Pin
 import time
 
 from app.i2c import Lcd
-from app.gpio import Dht
+from app.gpio import Dht, WaterTemperature
 from app.adc import Mq135
 
 
-def initialize():
-    lcd = Lcd()
+def initialize_gpio():
     dht = Dht()
+    wt = WaterTemperature()
+
+    return dht, wt
+
+def initialize_i2c():
+    lcd = Lcd()
+
+    return lcd
+
+def initialize_adc():
     mq = Mq135()
-    
-    return lcd, dht, mq
-    
+
+    return mq
 
 def main():
-    lcd, dht, mq = initialize()
+    dht, wt = initialize_gpio()
+    lcd = initialize_i2c()
+    mq = initialize_adc()
+
     # lcd.hello_world()
     # dht.measure()
     # print('hello')
-    mq.test() # error
+    mq.measure(temperature=0, humidity=0) # ToDo: temporary temperature and humidity
+    
 
 
 if __name__ == "__main__": 
