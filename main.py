@@ -1,7 +1,7 @@
 # Author: seansc.park
 
 from machine import Pin
-import utime
+import time
 
 from app.i2c import Lcd
 from app.gpio import Dht

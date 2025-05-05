@@ -9,7 +9,6 @@ More info:
 """
 
 import math
-import utime
 from machine import ADC
 
 class MQ135(object):

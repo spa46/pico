@@ -1,6 +1,6 @@
 # Author: seansc.park
 
-import utime
+import time
 from hal.hal_pinout import i2c
 from hal.hal_lcd_i2c import I2cLcd
 
@@ -14,6 +14,6 @@ class Lcd:
 
     def hello_world(self) -> None:
         self.lcd.putstr("Hello World")
-        utime.sleep(5)
+        time.sleep(5)
         self.lcd.clear()
         self.lcd.backlight_off()
