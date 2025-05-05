@@ -41,7 +41,6 @@
 | Component               | Pico Pin |
 | ----------------------- | -------- |
 | DHT22 (Temp & Humidity) | GP3      |
-| Water Level Sensor      | GP4      |
 
 ### 🔗 **UART Communication**
 
@@ -58,8 +57,15 @@
 | LED Grow Lights | GP13     |
 | Cooling Fan     | GP14     |
 
-### 📟 **I2C Communication (for LCD Display)**
+### 📟 **I2C Communication 
+#### **Water Level**
+| Signal | Pico Pin |
+| ------ | -------- |
+| SDA    | GP6    |
+| SCL    | GP7     |
 
+
+#### LCD Display**
 | Signal | Pico Pin |
 | ------ | -------- |
 | SDA    | GP20     |

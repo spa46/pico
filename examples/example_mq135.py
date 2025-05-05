@@ -9,7 +9,7 @@ More info:
 """
 
 import math
-import time
+import utime
 from machine import ADC
 
 class MQ135(object):
@@ -54,7 +54,7 @@ class MQ135(object):
     def get_resistance(self):
         """Returns the resistance of the sensor in kOhms // -1 if not value got in pin"""
         adc = ADC(self.pin)
-        value = adc.read()
+        value = adc.read_u16()
         if value == 0:
             return -1
 
@@ -66,18 +66,53 @@ class MQ135(object):
 
     def get_ppm(self):
         """Returns the ppm of CO2 sensed (assuming only CO2 in the air)"""
-        return self.PARA * math.pow((self.get_resistance()/ self.RZERO), -self.PARB)
+        resistance = self.get_resistance()
+        if resistance <= 0:
+            return -1  # or you can raise an Exception, depending on your design
+        return self.PARA * math.pow((resistance / self.RZERO), -self.PARB)
 
     def get_corrected_ppm(self, temperature, humidity):
-        """Returns the ppm of CO2 sensed (assuming only CO2 in the air)
-        corrected for temperature/humidity"""
-        return self.PARA * math.pow((self.get_corrected_resistance(temperature, humidity)/ self.RZERO), -self.PARB)
+        """Returns the ppm of CO2 sensed (assuming only CO2 in the air) corrected for temperature/humidity"""
+        corrected_resistance = self.get_corrected_resistance(temperature, humidity)
+        if corrected_resistance <= 0:
+            return -1  # Invalid reading
+        return self.PARA * math.pow((corrected_resistance / self.RZERO), -self.PARB)
 
     def get_rzero(self):
-        """Returns the resistance RZero of the sensor (in kOhms) for calibratioin purposes"""
-        return self.get_resistance() * math.pow((self.ATMOCO2/self.PARA), (1./self.PARB))
+        """Returns the resistance RZero of the sensor (in kOhms) for calibration purposes"""
+        resistance = self.get_resistance()
+        if resistance <= 0:
+            return -1  # Invalid reading
+        return resistance * math.pow((self.ATMOCO2 / self.PARA), (1.0 / self.PARB))
 
     def get_corrected_rzero(self, temperature, humidity):
         """Returns the resistance RZero of the sensor (in kOhms) for calibration purposes
         corrected for temperature/humidity"""
-        return self.get_corrected_resistance(temperature, humidity) * math.pow((self.ATMOCO2/self.PARA), (1./self.PARB))
+        corrected_resistance = self.get_corrected_resistance(temperature, humidity)
+        if corrected_resistance <= 0:
+            return -1  # Invalid reading
+        return corrected_resistance * math.pow((self.ATMOCO2 / self.PARA), (1.0 / self.PARB))
+
+def mq135lib_example():
+    """MQ135 lib example"""
+    # setup
+    temperature = 21.0
+    humidity = 25.0
+
+    mq135 = MQ135(28) # analog PIN 0
+
+    # loop
+    while True:
+        rzero = mq135.get_rzero()
+        corrected_rzero = mq135.get_corrected_rzero(temperature, humidity)
+        resistance = mq135.get_resistance()
+        ppm = mq135.get_ppm()
+        corrected_ppm = mq135.get_corrected_ppm(temperature, humidity)
+
+        print("MQ135 RZero: " + str(rzero) +"\t Corrected RZero: "+ str(corrected_rzero)+
+              "\t Resistance: "+ str(resistance) +"\t PPM: "+str(ppm)+
+              "\t Corrected PPM: "+str(corrected_ppm)+"ppm")
+        utime.sleep(0.3)
+
+if __name__ == "__main__":
+    mq135lib_example()

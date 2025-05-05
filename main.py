@@ -5,18 +5,23 @@ import utime
 
 from app.i2c import Lcd
 from app.gpio import Dht
+from app.adc import Mq135
 
 
 def initialize():
     lcd = Lcd()
     dht = Dht()
-    return lcd, dht
+    mq = Mq135()
+    
+    return lcd, dht, mq
     
 
 def main():
-    lcd, dht = initialize()
-    lcd.hello_world()
-    dht.measure()
+    lcd, dht, mq = initialize()
+    # lcd.hello_world()
+    # dht.measure()
+    # print('hello')
+    mq.test() # error
 
 
 if __name__ == "__main__": 
