@@ -99,7 +99,7 @@ def mq135lib_example():
     temperature = 21.0
     humidity = 25.0
 
-    mq135 = MQ135(28) # analog PIN 0
+    mq135 = MQ135(28) # analog PIN 28
 
     # loop
     while True:
