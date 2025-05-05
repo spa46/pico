@@ -12,9 +12,9 @@ from machine import SoftI2C
 # LCD_E = Pin(7, Pin.OUT)
 
 wpump = Pin(10, Pin.OUT)
-svalve = Pin(12, Pin.OUT)
-led_light = Pin(13, Pin.OUT)
-fan = Pin(14, Pin.OUT)
+svalve = Pin(11, Pin.OUT)
+led_light = Pin(12, Pin.OUT)
+fan = Pin(13, Pin.OUT)
 
 # GPIO
 wtemp = Pin(2) # DS18B20

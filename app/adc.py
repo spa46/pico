@@ -16,5 +16,3 @@ class Mq135:
         ppm = self.mq135.get_ppm()
         corrected_ppm = self.mq135.get_corrected_ppm(temperature, humidity)
 
-        time.sleep(0.3)
-
