@@ -48,13 +48,17 @@ def main():
     mq = init_mq135()
 
     navigator = MenuNavigator(lcd, menu_items)
-    navigator.run()
+
 
     # lcd.hello_world()
     # dht.measure()
     # print('hello')
-    mq.measure(temperature=0, humidity=0) # ToDo: temporary temperature and humidity
-    
+    # mq.measure(temperature=0, humidity=0) # ToDo: temporary temperature and humidity
+
+    while True:
+        navigator.display()
+        # utime.sleep(0.1)
+        navigator.update()
 
 
 

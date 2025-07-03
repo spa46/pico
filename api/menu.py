@@ -6,12 +6,12 @@ class MenuNavigator:
         self.selected = 0
         self.page_start = 0
         self.direction = 1
-        self.delay = delay
-        self.sleep_fn = sleep_fn if sleep_fn else self.default_sleep
-
-    def default_sleep(self, seconds):
-        import time
-        time.sleep(seconds)
+        # self.delay = delay
+    #     self.sleep_fn = sleep_fn if sleep_fn else self.default_sleep
+    #
+    # def default_sleep(self, seconds):
+    #     import time
+    #     time.sleep(seconds)
 
     def display(self):
         self.lcd.clear()
@@ -35,11 +35,6 @@ class MenuNavigator:
         elif self.selected >= self.page_start + self.page_size:
             self.page_start = self.selected - self.page_size + 1
 
-    def run(self):
-        while True:
-            self.display()
-            self.sleep_fn(self.delay)
-            self.update()
 
 # Usage example (replace with your actual LCD and menu items)
 # from machine import SoftI2C, Pin

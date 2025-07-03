@@ -46,8 +46,3 @@ class RotaryEncoder:
                 else:
                     print("Short Click")
                 self.button_pressed = False
-
-# Instantiate and keep the script running
-
-while True:
-    utime.sleep(1)
