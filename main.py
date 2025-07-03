@@ -6,6 +6,7 @@ import time
 from app.i2c import Lcd
 from app.gpio import Dht, WaterTemperature
 from app.adc import Mq135
+from app.relay import Relay
 
 
 def initialize_gpio():
@@ -13,6 +14,9 @@ def initialize_gpio():
     wt = WaterTemperature()
 
     return dht, wt
+
+def initialize_relay():
+    relay = Relay()
 
 def initialize_i2c():
     lcd = Lcd()

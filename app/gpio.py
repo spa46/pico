@@ -2,7 +2,7 @@
 
 # from hal.hal_pinout import sys_led
 from time import sleep
-from hal.hal_pinout import gpio2, gpio3
+from hal.hal_pinout import gpio2, gpio3, gpio4
 import dht
 import onewire, ds18x20
 
@@ -56,4 +56,12 @@ class WaterTemperature:
         for rom in self.roms:
             print(rom)
             
-            print(self.sensor.read_temp(rom))    
+            print(self.sensor.read_temp(rom))
+
+
+class InContactWaterLevel:
+    def __init__(self) -> None:
+        self.sensor = gpio4
+    
+    def measure(self):
+        self.sensor.value()

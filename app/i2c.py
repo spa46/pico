@@ -30,5 +30,5 @@ class TemperatureHumidity:
 
     def measure(self):
         temperature, humidity = self.sht31.get_measurement()
-
+        
         return temperature, humidity
