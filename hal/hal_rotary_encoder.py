@@ -1,12 +1,12 @@
 # examples/example_rotary_encoder.py
 import utime
-#from hal.hal_pinout import gpio16, gpio17, gpio18
+from hal.hal_pinout import gpio16, gpio17, gpio18
 
 class RotaryEncoder:
     def __init__(self, pin_s1, pin_s2, pin_key):
-        self.pin_s1 = pin_s1
-        self.pin_s2 = pin_s2
-        self.pin_key = pin_key
+        self.pin_s1 = gpio16    # s1
+        self.pin_s2 = gpio17    # s2
+        self.pin_key = gpio18   # key
 
         self.last_state = (self.pin_s1.value() << 1) | self.pin_s2.value()
         self.position = 0
@@ -48,6 +48,6 @@ class RotaryEncoder:
                 self.button_pressed = False
 
 # Instantiate and keep the script running
-encoder = RotaryEncoder(16, 17, 18)
+
 while True:
     utime.sleep(1)

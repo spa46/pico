@@ -1,4 +1,3 @@
-python
 class MenuNavigator:
     def __init__(self, lcd, menu_items, page_size=2, delay=5, sleep_fn=None):
         self.lcd = lcd
