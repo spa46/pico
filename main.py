@@ -37,6 +37,7 @@ def init_mq135():
 def init_rotary_encoder():
     return RotaryEncoder()
 
+
 def main():
     # Initilization
     dht = init_dht()
@@ -47,20 +48,25 @@ def main():
 
     mq = init_mq135()
 
-    navigator = MenuNavigator(lcd, menu_items)
-
+    menu = MenuNavigator(lcd, menu_items)
+    menu.display()
 
     # lcd.hello_world()
     # dht.measure()
     # print('hello')
     # mq.measure(temperature=0, humidity=0) # ToDo: temporary temperature and humidity
 
-    while True:
-        navigator.display()
+    # while True:
+    #     menu.display()
         # utime.sleep(0.1)
-        navigator.update()
 
+    def handle_rotation(direction):
+        if direction == 1:
+            menu.display(move=1)  # Right
+        elif direction == -1:
+            menu.display(move=-1)  # Left
 
+    m_ctrl.on_rotate = handle_rotation
 
 
 if __name__ == "__main__": 
