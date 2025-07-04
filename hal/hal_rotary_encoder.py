@@ -3,7 +3,7 @@ import utime
 from hal.hal_pinout import gpio16, gpio17, gpio18
 
 class RotaryEncoder:
-    def __init__(self, pin_s1, pin_s2, pin_key):
+    def __init__(self):
         self.pin_s1 = gpio16    # s1
         self.pin_s2 = gpio17    # s2
         self.pin_key = gpio18   # key
@@ -46,3 +46,5 @@ class RotaryEncoder:
                 else:
                     print("Short Click")
                 self.button_pressed = False
+
+encoder = RotaryEncoder(16, 17, 18)

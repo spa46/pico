@@ -7,11 +7,19 @@ from hal.hal_sht31 import SHT3X
 
 
 class Lcd:
-    def __init__(self) -> None:
+    def __new__(cls):
+        instance = super().__new__(cls)
         I2C_ADDR = i2c1.scan()[0]
-        self.lcd = I2cLcd(i2c1, I2C_ADDR, 2, 16)
-        self.lcd.clear()
+        instance.lcd = I2cLcd(i2c1, I2C_ADDR, 2, 16)
+        instance.lcd.clear()
+        
+        return instance.lcd
+        
+    def __init__(self) -> None:
+        # Initialization is handled in __new__
+        pass
 
+    
 
     def hello_world(self) -> None:
         self.lcd.putstr("Hello World")
