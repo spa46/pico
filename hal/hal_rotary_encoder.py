@@ -7,7 +7,8 @@ class RotaryEncoder:
         self.pin_s2 = gpio17    # s2
         self.pin_key = gpio18   # key
 
-        self.on_rotate = None  # Set this to your callback
+        self.on_event = None  # Unified callback: (event_type, value)
+
 
         self.last_state = (self.pin_s1.value() << 1) | self.pin_s2.value()
         self.position = 0
@@ -54,8 +55,8 @@ class RotaryEncoder:
         if self.state_counter >= self.sensitivity:
             self.state_counter = 0
             self.position += direction
-            if self.on_rotate:
-                self.on_rotate(direction)
+            if self.on_event:
+                self.on_event('rotate', direction)
 
     def button_handler(self, pin):
         if not self.pin_key.value():
@@ -65,7 +66,9 @@ class RotaryEncoder:
             if self.button_pressed:
                 duration = utime.ticks_diff(utime.ticks_ms(), self.last_button_time)
                 if duration > 700:
-                    print("Long Click")
+                    if self.on_event:
+                        self.on_event('long_press', 2)
                 else:
-                    print("Short Click")
+                    if self.on_event:
+                        self.on_event('short_press', 1)
                 self.button_pressed = False

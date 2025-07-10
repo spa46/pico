@@ -14,28 +14,38 @@ from hal.hal_rotary_encoder import RotaryEncoder
 
 
 def init_dht():
-    return Dht()
+    _dht = Dht()
+    print('Temp & Humidity Sensor initialized')
+    return _dht
 
 
 
 def init_water_temperature():
-    return WaterTemperature()
-
-    return dht, wt
+    wt = WaterTemperature()
+    print('Water temperature sensor initialized')
+    return wt
 
 def init_relay():
-    return Relay()
+    relay = Relay()
+    print('Relay initialized')
+    return relay
 
 
 def init_lcd():
-    return Lcd()
+    lcd = Lcd()
+    print('LCD initialized')
+    return lcd
 
 
 def init_mq135():
-    return Mq135()
+    mq = Mq135()
+    print('MQ135 sensor initialized')
+    return mq
 
 def init_rotary_encoder():
-    return RotaryEncoder()
+    encoder = RotaryEncoder()
+    print('Rotary encoder initialized')
+    return encoder
 
 
 def main():
@@ -60,13 +70,19 @@ def main():
     #     menu.display()
         # utime.sleep(0.1)
 
-    def handle_rotation(direction):
-        if direction == 1:
-            menu.display(move=1)  # Right
-        elif direction == -1:
-            menu.display(move=-1)  # Left
+    def handle_rotary_event(event_type, value):
+        if event_type == 'rotate':
+            if value == 1:
+                menu.display(move=1)  # Right
+            elif value == -1:
+                menu.display(move=-1)  # Left
+        elif event_type == 'short_press':
+            menu.enter()
+        elif event_type == 'long_press':
+            menu.back()
 
-    m_ctrl.on_rotate = handle_rotation
+
+    m_ctrl.on_event = handle_rotary_event
 
 
 if __name__ == "__main__": 
