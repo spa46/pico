@@ -30,6 +30,11 @@ class MenuNavigator:
     def enter(self):
         items, selected, _ = self.current()
         item = items[selected]
+        label = item["label"] if isinstance(item, dict) and "label" in item else str(item)
+        if label == "Temp & Humidity":
+            print("hello")
+        # if label == "PH Level":
+        #     print("hello")
         if isinstance(item, dict) and "submenu" in item:
             self.menu_stack.append((item["submenu"], 0, 0))
             self.display()
