@@ -61,9 +61,6 @@ def main():
     menu = MenuNavigator(lcd, menu_items)
     menu.display()
 
-    # lcd.hello_world()
-    # dht.measure()
-    # print('hello')
     # mq.measure(temperature=0, humidity=0) # ToDo: temporary temperature and humidity
 
     # while True:
@@ -85,5 +82,5 @@ def main():
     m_ctrl.on_event = handle_rotary_event
 
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     main()

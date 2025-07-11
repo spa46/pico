@@ -28,7 +28,7 @@ class Dht:
             self.humidity()
         except OSError as e:
             print('Failed to read sensor.')
-    
+
     def temperature(self) -> None:
         t = self.sensor.temperature()
         print(t)

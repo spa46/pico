@@ -1,3 +1,5 @@
+from api.menu_parser import parse_menu_enter
+
 class MenuNavigator:
     def __init__(self, lcd, menu_items, page_size=2):
         self.lcd = lcd
@@ -11,11 +13,13 @@ class MenuNavigator:
     def display(self, move=0):
         items, selected, page_start = self.current()
         selected = (selected + move) % len(items)
+
         # Adjust page_start
         if selected < page_start:
             page_start = selected
         elif selected >= page_start + self.page_size:
             page_start = selected - self.page_size + 1
+
         # Save state
         self.menu_stack[-1] = (items, selected, page_start)
         self.lcd.clear()
@@ -30,11 +34,10 @@ class MenuNavigator:
     def enter(self):
         items, selected, _ = self.current()
         item = items[selected]
-        label = item["label"] if isinstance(item, dict) and "label" in item else str(item)
-        if label == "Temp & Humidity":
-            print("hello")
-        # if label == "PH Level":
-        #     print("hello")
+        # Pass the whole item to the parser for more flexibility
+        if parse_menu_enter(self.lcd, item):
+            return
+
         if isinstance(item, dict) and "submenu" in item:
             self.menu_stack.append((item["submenu"], 0, 0))
             self.display()

@@ -7,8 +7,7 @@ menu_items = [
             "EC Level",
             "Water Temp",
             "Water Level",
-            "Light Intensity",
-            "System Status"
+            "Light Intensity"
         ]
     },
     {
@@ -28,16 +27,17 @@ menu_items = [
             "pH Target Range",
             "EC Target Range",
             "Temperature Thresholds",
-            "Time & Date",
-            "Factory Reset"
+            "Time & Date"
         ]
     },
     {
-        "label": "About",
+        "label": "System",
         "submenu": [
+            "System Status",
             "Firmware Version",
             "Build Date",
-            "System ID"
+            "System ID",
+            "Factory Reset"
         ]
     }
 ]
